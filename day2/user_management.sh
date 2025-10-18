@@ -21,8 +21,9 @@ create_user() {
     echo "User ${username} already exists. Please choose a different username."
     exit 1
   fi
-  read -p "Enter the passworfr for ${username}: " password
-  echo "User ${$username} created successfully."
+  read -sp "Enter the password for ${username}: " password
+  useradd -m -d /home/$username "$username" && echo "$username:$password" | sudo chpasswd
+  [ $? -eq 0 ] && echo -e "\nUser ${username} created successfully."
 }
 
 # function to delete a user
@@ -30,8 +31,9 @@ delete_user() {
     read -p "Enter the username to delete: " username
 #delete only if user exists
     if id "${username}" 2> /dev/null; then
-      echo "User ${username} deleted successfully."
-    else 
+      userdel -r "${username}"
+      [ $? -eq 0 ] && echo "User ${username} deleted successfully."
+    else
       echo "User ${username} does not exists."
       exit 1
     fi
@@ -41,36 +43,37 @@ delete_user() {
 reset_password() {
   read -p "Enter the username to reset password: " username
 #reset only if user exists
-if id "${username}" 2> /dev/null; then
-  read -p "Enter the new password for ${username}:" password
-  echo "Password for user ${username} reset successfully."
-else 
-  echo "User ${username} does not exists."
-  exit 1
-fi
+  if id "${username}" 2> /dev/null; then
+    read -sp "Enter the new password for ${username}:" password
+    echo -e "$username:$password" | sudo chpasswd
+    [ $? -eq 0 ] && echo -e "\nPassword for user ${username} reset successfully."
+  else
+    echo "User ${username} does not exists."
+    exit 1
+  fi
 }
 
 # function to list all users
 list_users() {
   echo "User accounts on the system:"
-  cut -d: -f1 /etc/passwd
+  awk -F ':' '{print $1}' /etc/passwd
 }
 
-# script logic
 # check if no arguments were provided
-if [[ $# -eq 0]]; then
+if [[ $# -eq 0 ]]; then
   usage_info
   exit 1
 fi
 
+#script logic
 while [ $# -gt 0 ]; do
-  case "$1"; in
-    -c/--create) create_user ;;
-    -d/--delete) delete_user ;;
-    -r/--reset) reset_password ;; 
-    -l/--list) list_users ;;
-    -h/--help) usage_info exit 0 ;;
-    *) echo "Invalid option: $1" usage_info exit 1 ;;
+  case "$1" in
+    -c|--create) create_user ;;
+    -d|--delete) delete_user ;;
+    -r|--reset) reset_password ;;
+    -l|--list) list_users ;;
+    -h|--help) usage_info exit 0 ;;
+    *) echo "Invalid option: $1"; usage_info; exit 1 ;;
   esac
   shift
 done
