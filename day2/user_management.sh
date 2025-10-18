@@ -16,11 +16,12 @@ usage_info() {
 # function to create a new user
 create_user() {
   read -p "Enter the new username: " username
-#check if user already exists
+  #check if user already exists
   if id "${username}" 2> /dev/null; then
     echo "User ${username} already exists. Please choose a different username."
     exit 1
   fi
+  # create user and set password
   read -sp "Enter the password for ${username}: " password
   useradd -m -d /home/$username "$username" && echo "$username:$password" | sudo chpasswd
   [ $? -eq 0 ] && echo -e "\nUser ${username} created successfully."
@@ -28,21 +29,21 @@ create_user() {
 
 # function to delete a user
 delete_user() {
-    read -p "Enter the username to delete: " username
-#delete only if user exists
-    if id "${username}" 2> /dev/null; then
-      userdel -r "${username}"
-      [ $? -eq 0 ] && echo "User ${username} deleted successfully."
-    else
-      echo "User ${username} does not exists."
-      exit 1
-    fi
+  read -p "Enter the username to delete: " username
+  #delete only if user exists
+  if id "${username}" 2> /dev/null; then
+    userdel -r "${username}"
+    [ $? -eq 0 ] && echo "User ${username} deleted successfully."
+  else
+    echo "User ${username} does not exists."
+    exit 1
+  fi
 }
 
 # function to reset user password
 reset_password() {
   read -p "Enter the username to reset password: " username
-#reset only if user exists
+  #reset only if user exists
   if id "${username}" 2> /dev/null; then
     read -sp "Enter the new password for ${username}:" password
     echo -e "$username:$password" | sudo chpasswd
