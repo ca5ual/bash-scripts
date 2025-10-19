@@ -1,21 +1,22 @@
 #!/bin/bash
 
+# help info
 usage_info() {
   echo "Usage: $0 <process_name>"
 }
 
-# Check if process name is provided and valid
+# Check if process name is provided
 if [ $# -eq 0 ]; then
-  echo "Error: Process name not found"
+  echo "Error: please provide a process name"
   usage_info
   exit 1
 fi
 
 process_name="$1"
 
-#check if the specified process is running
+# check if the specified process is running
+# pgrep return nothing if the process not found
 process_check() {
-#if the process is found, pgrep returns pids, otherwise returns nothing
   if pgrep -x "${process_name}" > /dev/null; then
     echo "Process ${process_name} is running."
   else
@@ -24,16 +25,18 @@ process_check() {
   fi
 }
 
-
+# running process if not
+# the function will attempt to restart the process automatically
+# for three times
 running_process() {
   echo "Attempting to start process ${process_name}..."
   local attempts=3
-  #the script will attempt to restart the process automatically for three times
   for (( i=1; i<=attempts; i++ )); do
     sudo systemctl start "${process_name}"
     if [ $? -eq 0 ]; then
-      echo "Process ${process_name} restarted successfully."
+      echo "Process ${process_name} started successfully."
       return 0
+    # check if the process name is valid 
     elif [ $? -ne 0 ]; then
       echo "Error: process name not found."
       exit 1
