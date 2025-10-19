@@ -54,6 +54,8 @@ Provides an interactive menu to monitor system resource usage (CPU, memory, disk
 
 ---
 ##  **Day 4 - Analyze System Log Files**
+
+###  log_analyzer.sh
 Analyzes system log files to find error and critical messages, count occurrences, and create summary reports.  
 Optionally archives the report after analysis.
 
