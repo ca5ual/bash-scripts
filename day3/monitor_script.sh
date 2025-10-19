@@ -36,7 +36,7 @@ monitor_service () {
       if [[ $? -eq 0 ]]; then
         echo "Service ${service_name} started successfully."
       else 
-        echo "Erorr: failed to start service ${process_name}."
+        echo "Erorr: failed to start service ${service_name}."
       fi
     fi
   fi
