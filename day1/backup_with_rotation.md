@@ -21,9 +21,6 @@ This Bash script creates a compressed backup of a selected directory and keeps o
 ### Output Example
 ```
 ✅ Backup created successfully: /home/user/Documents/projects/backup_2025-10-19_15-02-41.tar.gz
-🗑️  Removing old backups:
-  /home/user/Documents/projects/backup_2025-10-17_20-10-30.tar.gz
-  /home/user/Documents/projects/backup_2025-10-18_09-47-15.tar.gz
 ```
 
 ## Requirements
@@ -39,5 +36,3 @@ This Bash script creates a compressed backup of a selected directory and keeps o
 - Backups are stored in the same folder as the original directory.
 
 ---
-
-Simple as that — run it, and it will create backups automatically while cleaning up the old ones.
