@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# log_analyzer.sh - A script to analyze log files for errors and generate a summary report.
+# Usage: ./log_analyzer.sh <log_file_path>
+
 # Check if the correct number of arguments is provided
 if [[ $# -ne 1 ]]; then
   echo "Usage: $0 <log_file_path>"
@@ -16,7 +19,7 @@ if [ ! -f "${log_file}" ]; then
 fi
 
 #function to catch error entries in the log file
-error_catcher() {
+error_catcher () {
   
   # count the number of error entries in the log file "ERROR" or "FAILED" 
   # with case insensitivity
@@ -38,6 +41,7 @@ error_catcher() {
 }
 
 # function to archive the log file
+# prompts the user for confirmation before archiving
 archive_log () {
   read -p "Do you want to archive the log file? (y/n): " choice
   if [[ "${choice}" = "y" || "${choice}" = "Y" ]]; then
@@ -49,6 +53,8 @@ archive_log () {
 }
 
 # function to generate a summary report
+# the report includes the date, log file name and total lines processed
+# also calls the error_catcher function to include error analysis
 summary_report () {
   echo "-----------------------------------"
   local log_file_name=$(basename "${log_file}")
@@ -63,6 +69,7 @@ summary_report () {
 
 # script logic starts here
 # generate the report and save it to a file
+# archieve the log file if user agrees
 log_report=("${log_file}.$(date '+%Y-%m-%d').report")
 summary_report > ${log_report}
 echo "Log analysis report generated: ${log_report}"
