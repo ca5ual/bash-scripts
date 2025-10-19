@@ -14,7 +14,7 @@ It displays file names with their sizes and allows the user to enter text lines 
 **Key skills:**  
 - `ls`, `awk`, `read`, `while`, and string length operations in Bash.
 
-###  backup_script.sh
+###  [backup_script.sh](https://github.com/ca5ual/bash-scripts/blob/main/day1/backup_with_rotation.sh)
 Creates timestamped compressed backups (`.tar.gz`) of a given directory and automatically deletes older ones, keeping only the last three.
 
 **Key skills:**  
