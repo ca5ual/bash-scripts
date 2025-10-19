@@ -7,7 +7,7 @@ Each “day” includes one or more scripts demonstrating key Bash skills — lo
 
 ##  **Day 1 – Explorer & Backup Rotation**
 
-###  explorer.sh
+###  [explorer.sh](https://github.com/ca5ual/bash-scripts/blob/main/day1/explorer.sh)
 An interactive script that lists files and directories in the current working directory.  
 It displays file names with their sizes and allows the user to enter text lines to count characters interactively.
 
@@ -25,7 +25,7 @@ Creates timestamped compressed backups (`.tar.gz`) of a given directory and auto
 ---
 ##  **Day 2 –  User Management**
 
-###  user_manager.sh
+###  [user_management.sh](https://github.com/ca5ual/bash-scripts/blob/main/day2/user_management.sh)
 Manages Linux users from the command line — allows creation, deletion, listing, and password reset using flags.
 
 **Key skills:**  
@@ -36,7 +36,7 @@ Manages Linux users from the command line — allows creation, deletion, listing
 ---
 ##  **Day 3 – Process and System Monitoring**
 
-###  process_monitor.sh
+###  [monitor_process.sh](https://github.com/ca5ual/bash-scripts/blob/main/day3/monitor_process.sh)
 Checks whether a given process (service) is running using `pgrep`.  
 If it isn’t, the script tries to start it automatically up to three times with `systemctl`.
 
@@ -44,7 +44,7 @@ If it isn’t, the script tries to start it automatically up to three times with
 - Process management with `pgrep` and `systemctl`  
 - Conditional retries and error handling
 
-###  monitoring_script.sh
+###  [monitor_script.sh](https://github.com/ca5ual/bash-scripts/blob/main/day3/monitor_script.sh)
 Provides an interactive menu to monitor system resource usage (CPU, memory, disk) and check or start specific services.
 
 **Key skills:**  
@@ -55,7 +55,7 @@ Provides an interactive menu to monitor system resource usage (CPU, memory, disk
 ---
 ##  **Day 4 - Analyze System Log Files**
 
-###  log_analyzer.sh
+###  [log_analyzer.sh](https://github.com/ca5ual/bash-scripts/blob/main/day4/log_analyzer.sh)
 Analyzes system log files to find error and critical messages, count occurrences, and create summary reports.  
 Optionally archives the report after analysis.
 
@@ -67,7 +67,7 @@ ___
 
 ##  **Day 5 – Restaurant Order System**
 
-###  restaurant_order.sh
+###  [restaurant_order.sh](https://github.com/ca5ual/bash-scripts/blob/main/day5/restaurant_order.sh)
 A fun interactive script that simulates a restaurant ordering system.  
 Reads menu items from `menu.txt`, validates orders, and calculates the total bill.
 
